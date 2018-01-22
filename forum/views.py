@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
@@ -45,7 +46,7 @@ class PostList(ListView):
         return context
 
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     success_url = reverse_lazy('post_list')
     fields = ['title']
@@ -59,18 +60,18 @@ class PostView(DetailView):
     model = Post
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     success_url = reverse_lazy('post_list')
     fields = ['title']
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('post_list')
 
 
-class CommentCreate(CreateView):
+class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     success_url = reverse_lazy('post_list')
     fields = ['text']
