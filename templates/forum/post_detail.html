@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Simple Forum{% endblock %}
+
+{% block content %}
+<h1>Posts</h1>
+
+<p>{{ post.title }}  by {{ post.author }}</p>
+
+{% if post.comment_set.all %}
+<ul>
+    {% for comment in post.comment_set.all %}
+    <p>{{ comment.text }} by {{ comment.author }}</p>
+    {% endfor %}
+{% endif %}
+</ul>
+
+<a href="{% url "comment_create" post.id %}">New comment</a>
+<a href="{% url "post_list" %}">Posts index</a>
+{% endblock %}
