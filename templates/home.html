@@ -3,22 +3,17 @@
 {% block title %}Simple Forum{% endblock %}
 
 {% block content %}
-    <div class="posts">
-    <h2>Home</h2>
+<h1>Posts</h1>
+<ul>
     {% for post in object_list %}
-        <ul>
-        {% if post %}
-            <li>{{ post.title }}
-            <a href="{% url "post_update" post.id %}">{{ post.title }}</a>
-            <a href="{% url "post_delete" post.id %}">delete</a>
-            </li>
-        </ul>
-        {% else %}
-            <p>No posts</p>
-            <a href="{% url "post_create" %}">New</a>
-        {% endif %}
+    <li>{{ post.title }}  :
+        {% block controls %}
+        <a href="{% url "post_view" post.id %}">View</a>
+        {% endblock %}
+    <p>{{ post.comment_id }}</p>
+    </li>
     {% endfor %}
-    <a href="{% url "post_list" %}">Posts</a>
-    </div>
+</ul>
 
+<a href="{% url "post_create" %}">New</a>
 {% endblock %}

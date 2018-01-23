@@ -124,7 +124,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Login Redirect
+# Login Redirects
+LOGIN_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
 
 #Authentication backends
