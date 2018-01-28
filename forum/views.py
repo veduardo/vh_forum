@@ -4,10 +4,13 @@ from __future__ import unicode_literals
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
+from tagging.models import Tag, TaggedItem
 
 from .forms import *
 from .models import Post, Comment
@@ -30,6 +33,16 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
+def search_tag(request, tag, object_id=None, page=1):
+    try:
+        query_tag = Tag.objects.get(name=tag)
+    except ObjectDoesNotExist:
+        query_tag = ''
+
+    entries = TaggedItem.objects.get_by_model(Post, query_tag)
+    return render(request, "forum/tag_list.html", {'tag':tag, 'entries':entries})
+
+
 ## Class Based
 class Home(ListView):
     model = Post
@@ -42,7 +55,7 @@ class PostList(ListView):
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     success_url = reverse_lazy('post_list')
-    fields = ['title']
+    fields = ['title', 'category']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -56,7 +69,7 @@ class PostView(DetailView):
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     success_url = reverse_lazy('post_list')
-    fields = ['title']
+    fields = ['title', 'category']
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):

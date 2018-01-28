@@ -6,6 +6,7 @@
 <h1>Posts</h1>
 
 <p>{{ post.title }}  by {{ post.author }}</p>
+<p>category: {{ post.category }}</p>
 
 {% if post.comment_set.all %}
 <ul>

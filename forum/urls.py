@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^edit/(?P<pk>\d+)$', views.PostUpdate.as_view(), name='post_update'),
     url(r'^delete/(?P<pk>\d+)$', views.PostDelete.as_view(), name='post_delete'),
     url(r'^(?P<pk>\d+)/comment/$', views.CommentCreate.as_view(), name='comment_create'),
+    url(r'^tag/([\w{}_-]+)$', views.search_tag, name='search'),
 ]

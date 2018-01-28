@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tagging',
     'forum',
 ]
 
@@ -134,3 +135,8 @@ AUTHENTICATION_BACKENDS = (
                                                         # 'authenticate(username=username, password=password)'
                                                         # call to return None on forum.views.signup
     )
+
+##
+# Django Tagging Specifics
+##
+FORCE_LOWERCASE_TAGS = True
