@@ -6,7 +6,7 @@ from . import views
 
 # app_name = 'forum'
 urlpatterns = [
-    url(r'^$', views.PostList.as_view(template_name='post_list.html'), name='post_list'),
+    url(r'^$', views.Home.as_view(template_name='home.html'), name='home'),
     url(r'^new$', views.PostCreate.as_view(), name='post_create'),
     url(r'^view/(?P<pk>\d+)$', views.PostView.as_view(), name='post_view'),
     url(r'^edit/(?P<pk>\d+)$', views.PostUpdate.as_view(), name='post_update'),

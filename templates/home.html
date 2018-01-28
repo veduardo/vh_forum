@@ -9,6 +9,10 @@
     <li>{{ post.title }}  :
         {% block controls %}
         <a href="{% url "post_view" post.id %}">View</a>
+        {% if user.is_authenticated %}
+        <a href="{% url "post_update" post.id %}">Update</a>
+        <a href="{% url "post_delete" post.id %}">Delete</a>
+        {% endif %}
         {% endblock %}
     <p>{{ post.comment_id }}</p>
     </li>

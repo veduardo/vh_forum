@@ -54,7 +54,7 @@ class PostList(ListView):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('home')
     fields = ['title', 'category']
 
     def form_valid(self, form):
@@ -68,18 +68,18 @@ class PostView(DetailView):
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('home')
     fields = ['title', 'category']
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('home')
 
 
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('home')
     fields = ['text']
 
     def form_valid(self, form, **kwargs):
