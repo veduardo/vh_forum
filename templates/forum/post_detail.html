@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %}Simple Forum{% endblock %}
-
 {% block content %}
 <h1>Posts</h1>
 
-<p>{{ post.title }}  by {{ post.author }}</p>
+<p>{{ post.title }}  by <i>{{ post.author }}</i></p>
 <p>category: {{ post.category }}</p>
 
 {% if post.comment_set.all %}
@@ -16,6 +14,7 @@
 {% endif %}
 </ul>
 
-<a href="{% url "comment_create" post.id %}">New comment</a>
-<a href="{% url "home" %}">Posts index</a>
+<hr>
+<a href="{% url "comment_create" post.id %}" class="btn btn-default">New comment</a>
+<a href="{% url "home" %}" class="btn btn-default">Cancel</a>
 {% endblock %}

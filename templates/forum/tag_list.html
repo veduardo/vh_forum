@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Simple Forum{% endblock %}
-
 {% block content %}
 <p>You searched for the tag: {{tag}}</p>
 
 {% if entries %}
     {% for entry in entries %}
-    <h2><a href="{% url "post_view" entry.id %}">{{entry.title}}</a></h2>
+    <p><a href="{% url "post_view" entry.id %}">{{entry.title}}</a></p>
     {% endfor %}
 {% else %}
 <p>No articles have that tag</p>
 {% endif %}
-<a href="{% url "home" %}">Posts index</a>
+<a class="glyphicon glyphicon-arrow-left" href="{% url "home" %}"> Posts</a>
 {% endblock %}
