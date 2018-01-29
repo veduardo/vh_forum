@@ -33,13 +33,15 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-def search_tag(request, tag, object_id=None, page=1):
-    try:
-        query_tag = Tag.objects.get(name=tag)
-    except ObjectDoesNotExist:
-        query_tag = ''
+def search_tag(request):
+    if request.method == 'GET':
+        tag = request.GET.get('tag', None)
+        try:
+            query_tag = Tag.objects.get(name=tag)
+        except ObjectDoesNotExist:
+            query_tag = ''
 
-    entries = TaggedItem.objects.get_by_model(Post, query_tag)
+        entries = TaggedItem.objects.get_by_model(Post, query_tag)
     return render(request, "forum/tag_list.html", {'tag':tag, 'entries':entries})
 
 

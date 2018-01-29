@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>You searched for the tag: {{tag}}</p>
+<h2>Results for: <i>{{tag}}</i></h2>
 
 {% if entries %}
     {% for entry in entries %}
-    <p><a href="{% url "post_view" entry.id %}">{{entry.title}}</a></p>
+    <p><a href="{% url "post_view" entry.id %}">{{ entry.title|capfirst }} by <i>{{ entry.author }}</i> [{{ entry.created_on }}]</p>
     {% endfor %}
 {% else %}
 <p>No articles have that tag</p>
