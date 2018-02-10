@@ -5,16 +5,20 @@
 <h1>Posts</h1>
 <hr>
 <p>
-    {% for post in object_list %}
-    <p>{{ post.title|capfirst }} by <i>{{ post.author }}</i> [{{ post.created_on }}]
-        <a href="{% url "post_view" post.id %}">View</a>
-        {% if user.is_authenticated %}
-        <a href="{% url "post_update" post.id %}">Update</a>
-        <a href="{% url "post_delete" post.id %}">Delete</a>
-        {% endif %}
-    <p>{{ post.comment_id }}</p>
-    </p>
-    {% endfor %}
+    {% if object_list %}
+        {% for post in object_list %}
+        <p>{{ post.title|capfirst }} by <i>{{ post.author }}</i> [{{ post.created_on }}]
+            <a href="{% url "post_view" post.id %}">View</a>
+            {% if user.is_authenticated %}
+            <a href="{% url "post_update" post.id %}">Update</a>
+            <a href="{% url "post_delete" post.id %}">Delete</a>
+            {% endif %}
+        <p>{{ post.comment_id }}</p>
+        </p>
+        {% endfor %}
+    {% else %}
+        <p>No posts</p>
+    {% endif%}
 </p>
 
 <a class="btn btn-default" href="{% url "post_create" %}">New post</a>
